@@ -18,7 +18,7 @@ const accentVariants = {
   hover: { scaleX: 1, transition: { duration: 0.35, ease } },
 }
 
-export default function ProductCard({ slug, category, subtitle, description, tags = [], badge }) {
+export default function ProductCard({ slug, category, subtitle, description, tags = [], badge, images = [] }) {
   return (
     <motion.article
       className="group relative bg-raw-black overflow-hidden"
@@ -29,38 +29,50 @@ export default function ProductCard({ slug, category, subtitle, description, tag
     >
 
       {/* ── Large image area ── */}
-      {/* Replace the motion.div content with <img src="..." className="w-full h-full object-cover" /> */}
       <div
         className="relative overflow-hidden bg-raw-charcoal"
         style={{ aspectRatio: '3 / 4' }}
       >
-        {/* Image / placeholder — scales on card hover via variant propagation */}
-        <motion.div
-          variants={imageVariants}
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),' +
-              'linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        {/* Center label — remove when real photo is added */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 z-10">
-          <span
-            className="font-mono uppercase"
-            style={{ fontSize: '0.55rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.12)' }}
-          >
-            {slug}
-          </span>
-          <span
-            className="font-mono uppercase"
-            style={{ fontSize: '0.55rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.1)' }}
-          >
-            Photo Coming Soon
-          </span>
-        </div>
+        {images.length > 0 ? (
+          <img
+            src={images[0]}
+            alt={category}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        ) : (
+          <>
+            <motion.div
+              variants={imageVariants}
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),' +
+                  'linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                backgroundSize: '40px 40px',
+              }}
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 z-10">
+              <span
+                className="font-mono uppercase"
+                style={{ fontSize: '0.55rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.12)' }}
+              >
+                {slug}
+              </span>
+              <span
+                className="font-mono uppercase"
+                style={{ fontSize: '0.55rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.1)' }}
+              >
+                Photo Coming Soon
+              </span>
+            </div>
+          </>
+        )}
 
         {/* Badge */}
         {badge && (

@@ -3,11 +3,12 @@ import ProductCard from './ProductCard'
 const products = [
   {
     slug: '01',
-    category: 'Bags',
-    subtitle: 'Upcycled Accessories',
+    category: "katom'Co",
+    subtitle: 'Upcycled Denim Bag',
     description:
-      'Reconstructed entirely from discarded denim, canvas, and deadstock. Functional. Unique. Irreplaceable.',
+      'Reconstructed from discarded denim shorts with hand-stitched floral embroidery. Functional. Unique. Irreplaceable.',
     tags: ['Deadstock', 'Zero Waste', 'One of One'],
+    images: ['/bag-1.jpg', '/bag-2.jpg', '/bag-3.jpg'],
   },
   {
     slug: '02',

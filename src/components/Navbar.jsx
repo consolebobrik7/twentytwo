@@ -9,6 +9,11 @@ const links = [
   { label: 'CONTACT',    href: '#contact'    },
 ]
 
+function scrollTo(href) {
+  const el = document.querySelector(href)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
@@ -50,6 +55,7 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
+              onClick={e => { e.preventDefault(); scrollTo(l.href) }}
               className="font-mono text-[0.6rem] tracking-[0.2em] text-ash
                          hover:text-off-white transition-colors uppercase"
             >
@@ -61,6 +67,7 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <a
           href="#collection"
+          onClick={e => { e.preventDefault(); scrollTo('#collection') }}
           className="hidden md:inline-block font-mono font-bold uppercase
                      bg-off-white text-raw-black transition-opacity hover:opacity-80"
           style={{ fontSize: '0.58rem', letterSpacing: '0.2em', padding: '0.5rem 1.1rem' }}
@@ -101,7 +108,7 @@ export default function Navbar() {
               <motion.a
                 key={l.href}
                 href={l.href}
-                onClick={close}
+                onClick={e => { e.preventDefault(); scrollTo(l.href); close() }}
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.08 * i, ease }}
@@ -121,7 +128,7 @@ export default function Navbar() {
 
             <motion.a
               href="#collection"
-              onClick={close}
+              onClick={e => { e.preventDefault(); scrollTo('#collection'); close() }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.32, ease }}
