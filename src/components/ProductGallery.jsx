@@ -9,6 +9,8 @@ const products = [
       'Reconstructed from discarded denim shorts with hand-stitched floral embroidery. Functional. Unique. Irreplaceable.',
     tags: ['Deadstock', 'Zero Waste', 'One of One'],
     images: ['/bag-1.jpg', '/bag-2.jpg', '/bag-3.jpg'],
+    price: '10',
+    stripeUrl: 'https://buy.stripe.com/test_dRm5kwedq4l35sw2656J200',
   },
   {
     slug: '02',
