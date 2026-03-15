@@ -6,6 +6,7 @@ const ease  = [0.215, 0.61, 0.355, 1]
 const links = [
   { label: 'COLLECTION', href: '#collection' },
   { label: 'MANIFESTO',  href: '#manifesto'  },
+  { label: 'FAQ',        href: '#faq'        },
   { label: 'CONTACT',    href: '#contact'    },
 ]
 

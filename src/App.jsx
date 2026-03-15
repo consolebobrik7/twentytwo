@@ -13,6 +13,7 @@ import Manifesto          from './components/Manifesto'
 import SustainabilityBar  from './components/SustainabilityBar'
 import ProductGallery     from './components/ProductGallery'
 import Mission            from './components/Mission'
+import FAQ               from './components/FAQ'
 import Waitlist           from './components/Waitlist'
 import Footer             from './components/Footer'
 
@@ -78,6 +79,7 @@ export default function App() {
         <FadeIn delay={0.05}><SustainabilityBar /></FadeIn>
         <FadeIn delay={0.05}><ProductGallery /></FadeIn>
         <FadeIn delay={0.05}><Mission /></FadeIn>
+        <FadeIn delay={0.05}><FAQ /></FadeIn>
         <FadeIn delay={0.05}><Waitlist /></FadeIn>
         <FadeIn delay={0.05}><Footer /></FadeIn>
       </motion.main>
