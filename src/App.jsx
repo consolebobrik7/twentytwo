@@ -31,6 +31,7 @@ export default function App() {
       smoothWheel: true,
     })
     lenisRef.current = lenis
+    window.__lenis = lenis
 
     let rafId
     function raf(time) {
