@@ -20,7 +20,7 @@ export default function Footer() {
               <a
                 key={href}
                 href={href}
-                onClick={e => { e.preventDefault(); const el = document.querySelector(href); if (el) window.__lenis ? window.__lenis.scrollTo(el) : el.scrollIntoView({ behavior: 'smooth' }) }}
+                onClick={e => { e.preventDefault(); window.__lenis ? window.__lenis.scrollTo(href, { offset: -60 }) : document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }) }}
                 className="label-tag hover:text-off-white transition-colors"
               >{label}</a>
             ))}

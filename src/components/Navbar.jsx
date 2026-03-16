@@ -11,10 +11,12 @@ const links = [
 ]
 
 function scrollTo(href) {
-  const el = document.querySelector(href)
-  if (!el) return
-  if (window.__lenis) window.__lenis.scrollTo(el)
-  else el.scrollIntoView({ behavior: 'smooth' })
+  if (window.__lenis) {
+    window.__lenis.scrollTo(href, { offset: -60 })
+  } else {
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 export default function Navbar() {

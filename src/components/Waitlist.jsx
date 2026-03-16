@@ -75,7 +75,7 @@ export default function Waitlist() {
         {/* CTA — view collection */}
         <a
           href="#collection"
-          onClick={e => { e.preventDefault(); const el = document.querySelector('#collection'); if (el) window.__lenis ? window.__lenis.scrollTo(el) : el.scrollIntoView({ behavior: 'smooth' }) }}
+          onClick={e => { e.preventDefault(); window.__lenis ? window.__lenis.scrollTo('#collection', { offset: -60 }) : document.querySelector('#collection')?.scrollIntoView({ behavior: 'smooth' }) }}
           className="font-inter font-bold uppercase inline-block mb-12
                      transition-opacity duration-150 hover:opacity-85"
           style={{
