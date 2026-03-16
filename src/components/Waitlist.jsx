@@ -75,6 +75,7 @@ export default function Waitlist() {
         {/* CTA — view collection */}
         <a
           href="#collection"
+          onClick={e => { e.preventDefault(); document.querySelector('#collection')?.scrollIntoView({ behavior: 'smooth' }) }}
           className="font-inter font-bold uppercase inline-block mb-12
                      transition-opacity duration-150 hover:opacity-85"
           style={{

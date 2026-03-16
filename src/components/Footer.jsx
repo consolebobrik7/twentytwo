@@ -16,9 +16,14 @@ export default function Footer() {
           </span>
 
           <nav className="flex flex-wrap gap-6 md:gap-10">
-            <a href="#collection" className="label-tag hover:text-off-white transition-colors">Collection</a>
-            <a href="#manifesto"  className="label-tag hover:text-off-white transition-colors">Manifesto</a>
-            <a href="#contact"    className="label-tag hover:text-off-white transition-colors">Contact</a>
+            {[['#collection','Collection'],['#manifesto','Manifesto'],['#faq','FAQ'],['#contact','Contact']].map(([href, label]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={e => { e.preventDefault(); document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="label-tag hover:text-off-white transition-colors"
+              >{label}</a>
+            ))}
           </nav>
         </div>
 
