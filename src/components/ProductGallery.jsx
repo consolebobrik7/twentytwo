@@ -1,34 +1,5 @@
 import ProductCard from './ProductCard'
-
-const products = [
-  {
-    slug: '01',
-    category: "katom'Co",
-    subtitle: 'Upcycled Denim Bag',
-    description:
-      'Reconstructed from discarded denim shorts with hand-stitched floral embroidery. Functional. Unique. Irreplaceable.',
-    tags: ['Deadstock', 'Zero Waste', 'One of One'],
-    images: ['/bag-1.jpg', '/bag-2.jpg', '/bag-3.jpg'],
-    price: '10',
-    stripeUrl: 'https://buy.stripe.com/test_dRm5kwedq4l35sw2656J200',
-  },
-  {
-    slug: '02',
-    category: 'Jeans',
-    subtitle: 'Reworked Denim',
-    description:
-      'Sourced denim rebuilt with raw hems, patchwork inserts, and custom distressing. Every pair is one-of-one.',
-    tags: ['Reconstructed', 'Denim', 'One of One'],
-  },
-  {
-    slug: '03',
-    category: 'Tops',
-    subtitle: 'Deconstructed Long Sleeves',
-    description:
-      'Oversized silhouettes built from reclaimed jersey and fleece. Cut to last a decade, not a season.',
-    tags: ['Oversized', 'Reclaimed Jersey', 'Unisex'],
-  },
-]
+import { products } from '../data/products'
 
 export default function ProductGallery() {
   return (

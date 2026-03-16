@@ -1,27 +1,34 @@
 import { useState, useEffect, useRef } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 
-import CustomCursor       from './components/CustomCursor'
-import ScrollProgress     from './components/ScrollProgress'
-import IntroLoader        from './components/IntroLoader'
-import FadeIn             from './components/FadeIn'
-import Ticker             from './components/Ticker'
-import Navbar             from './components/Navbar'
-import Hero               from './components/Hero'
-import Manifesto          from './components/Manifesto'
-import SustainabilityBar  from './components/SustainabilityBar'
-import ProductGallery     from './components/ProductGallery'
-import Mission            from './components/Mission'
-import FAQ               from './components/FAQ'
-import Waitlist           from './components/Waitlist'
-import Footer             from './components/Footer'
+import CustomCursor   from './components/CustomCursor'
+import ScrollProgress from './components/ScrollProgress'
+import IntroLoader    from './components/IntroLoader'
+import Home           from './pages/Home'
+import ProductDetail  from './pages/ProductDetail'
 
-export default function App() {
-  const [loading, setLoading] = useState(true)
+// IntroLoader only shows once per browser session
+const hasVisited = sessionStorage.getItem('__22_visited')
+
+function AnimatedRoutes({ ready }) {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home ready={ready} />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
+
+function AppInner() {
+  const [loading, setLoading] = useState(!hasVisited)
   const lenisRef = useRef(null)
 
-  // ── Lenis smooth scroll (desktop only — iOS Safari has native momentum) ──
+  // Lenis smooth scroll (desktop only)
   useEffect(() => {
     if (window.matchMedia('(hover: none)').matches) return
 
@@ -34,22 +41,19 @@ export default function App() {
     window.__lenis = lenis
 
     let rafId
-    function raf(time) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
+    function raf(time) { lenis.raf(time); rafId = requestAnimationFrame(raf) }
     rafId = requestAnimationFrame(raf)
 
-    return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-    }
+    return () => { cancelAnimationFrame(rafId); lenis.destroy() }
   }, [])
 
-  // ── Intro loader timing ──────────────────────────────────────────────
-  // 2000ms display → AnimatePresence triggers 1.1s fade-out → Hero reveals
+  // Intro loader — only on first visit
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 2000)
+    if (hasVisited) return
+    const t = setTimeout(() => {
+      setLoading(false)
+      sessionStorage.setItem('__22_visited', '1')
+    }, 2000)
     return () => clearTimeout(t)
   }, [])
 
@@ -62,28 +66,22 @@ export default function App() {
         {loading && <IntroLoader key="loader" />}
       </AnimatePresence>
 
-      <motion.main
+      <motion.div
         className="bg-raw-black min-h-screen"
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
       >
-        <Ticker accent />
-        <Navbar />
-
-        {/* Hero gets `ready` so its stagger fires after loader exits */}
-        <Hero ready={!loading} />
-
-        <Ticker reverse />
-
-        <FadeIn><Manifesto /></FadeIn>
-        <FadeIn delay={0.05}><SustainabilityBar /></FadeIn>
-        <FadeIn delay={0.05}><ProductGallery /></FadeIn>
-        <FadeIn delay={0.05}><Mission /></FadeIn>
-        <FadeIn delay={0.05}><FAQ /></FadeIn>
-        <FadeIn delay={0.05}><Waitlist /></FadeIn>
-        <FadeIn delay={0.05}><Footer /></FadeIn>
-      </motion.main>
+        <AnimatedRoutes ready={!loading} />
+      </motion.div>
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppInner />
+    </BrowserRouter>
   )
 }

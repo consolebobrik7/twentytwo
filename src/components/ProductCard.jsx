@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const ease = [0.215, 0.61, 0.355, 1]
 
-export default function ProductCard({ slug, category, subtitle, description, tags = [], badge, images = [], price, stripeUrl }) {
+export default function ProductCard({ id, slug, category, subtitle, description, tags = [], badge, images = [], price, stripeUrl }) {
   const [current, setCurrent] = useState(0)
+  const navigate = useNavigate()
 
   function prev(e) {
     e.stopPropagation()
@@ -17,7 +19,8 @@ export default function ProductCard({ slug, category, subtitle, description, tag
 
   return (
     <motion.article
-      className="group relative bg-raw-black flex flex-col"
+      className="group relative bg-raw-black flex flex-col cursor-pointer"
+      onClick={() => id && navigate(`/product/${id}`)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -116,7 +119,7 @@ export default function ProductCard({ slug, category, subtitle, description, tag
         >
           <span className="font-mono uppercase"
             style={{ fontSize: '0.48rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.7)' }}>
-            Quick View
+            View Details →
           </span>
         </div>
       </div>
