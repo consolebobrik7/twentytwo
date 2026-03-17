@@ -121,12 +121,12 @@ export default function Waitlist() {
                 value={email}
                 onChange={e => { setEmail(e.target.value); setError('') }}
                 placeholder="your@email.com"
-                className="flex-1 text-off-white font-inter text-sm px-4 py-3.5
+                className="flex-1 text-off-white font-inter text-sm px-4
                            placeholder:text-white/25 focus:outline-none transition-colors"
                 style={{
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.12)',
-                  borderRight: 'none',
+                  minHeight: '3rem',
                 }}
                 onFocus={e => e.target.style.borderColor = 'rgba(255,255,255,0.3)'}
                 onBlur={e  => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
@@ -134,7 +134,7 @@ export default function Waitlist() {
               <button
                 type="submit"
                 className="font-inter font-bold uppercase whitespace-nowrap
-                           transition-opacity hover:opacity-85"
+                           transition-opacity hover:opacity-85 mt-px sm:mt-0"
                 style={{
                   background: '#ffffff',
                   color: '#080808',

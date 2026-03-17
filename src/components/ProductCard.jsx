@@ -52,11 +52,11 @@ export default function ProductCard({ id, slug, category, subtitle, description,
             }}
           >
             <span className="font-mono uppercase"
-              style={{ fontSize: '0.5rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.12)' }}>
+              style={{ fontSize: '0.55rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.12)' }}>
               {slug}
             </span>
             <span className="font-mono uppercase"
-              style={{ fontSize: '0.5rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.08)' }}>
+              style={{ fontSize: '0.55rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.1)' }}>
               Photo Coming Soon
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function ProductCard({ id, slug, category, subtitle, description,
         {badge && (
           <div className="absolute top-3 left-3 z-10">
             <span className="font-mono uppercase" style={{
-              fontSize: '0.48rem', letterSpacing: '0.18em', color: '#b52e2e',
+              fontSize: '0.5rem', letterSpacing: '0.18em', color: '#b52e2e',
               border: '1px solid rgba(181,46,46,0.35)', padding: '0.15rem 0.4rem',
               background: 'rgba(8,8,8,0.75)',
             }}>
@@ -75,50 +75,57 @@ export default function ProductCard({ id, slug, category, subtitle, description,
           </div>
         )}
 
-        {/* Image arrows */}
+        {/* Image arrows — always visible on mobile, hover-only on desktop */}
         {images.length > 1 && (
           <>
             <button onClick={prev}
               className="absolute left-2 top-1/2 -translate-y-1/2 z-10
-                         opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                         opacity-100 md:opacity-0 md:group-hover:opacity-100
+                         transition-opacity duration-200 flex items-center justify-center"
               style={{
-                background: 'rgba(8,8,8,0.55)', border: '1px solid rgba(255,255,255,0.12)',
-                color: '#fff', width: 26, height: 26,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem',
+                background: 'rgba(8,8,8,0.6)', border: '1px solid rgba(255,255,255,0.15)',
+                color: '#fff', width: 40, height: 40, fontSize: '1.1rem',
               }}>‹</button>
             <button onClick={next}
               className="absolute right-2 top-1/2 -translate-y-1/2 z-10
-                         opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                         opacity-100 md:opacity-0 md:group-hover:opacity-100
+                         transition-opacity duration-200 flex items-center justify-center"
               style={{
-                background: 'rgba(8,8,8,0.55)', border: '1px solid rgba(255,255,255,0.12)',
-                color: '#fff', width: 26, height: 26,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem',
+                background: 'rgba(8,8,8,0.6)', border: '1px solid rgba(255,255,255,0.15)',
+                color: '#fff', width: 40, height: 40, fontSize: '1.1rem',
               }}>›</button>
 
             {/* Dots */}
-            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10">
               {images.map((_, i) => (
-                <button key={i} onClick={e => { e.stopPropagation(); setCurrent(i) }}
-                  style={{
-                    width: i === current ? 14 : 4, height: 4,
-                    background: i === current ? '#ffffff' : 'rgba(255,255,255,0.3)',
-                    border: 'none', padding: 0, cursor: 'pointer',
+                <button key={i}
+                  onClick={e => { e.stopPropagation(); setCurrent(i) }}
+                  className="flex items-center justify-center"
+                  style={{ width: 24, height: 24, background: 'transparent', border: 'none', padding: 0, cursor: 'pointer' }}
+                >
+                  <span style={{
+                    display: 'block',
+                    width: i === current ? 16 : 5,
+                    height: 4,
+                    background: i === current ? '#ffffff' : 'rgba(255,255,255,0.35)',
                     transition: 'all 0.25s ease',
                   }} />
+                </button>
               ))}
             </div>
           </>
         )}
 
-        {/* Quick view — appears on hover at bottom of image */}
+        {/* View Details — always visible on mobile, hover-only on desktop */}
         <div
           className="absolute bottom-0 left-0 right-0 z-10
-                     opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                     flex items-center justify-center py-2.5"
-          style={{ background: 'rgba(8,8,8,0.72)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+                     opacity-100 md:opacity-0 md:group-hover:opacity-100
+                     transition-opacity duration-300
+                     flex items-center justify-center py-3"
+          style={{ background: 'rgba(8,8,8,0.75)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
         >
           <span className="font-mono uppercase"
-            style={{ fontSize: '0.48rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.7)' }}>
+            style={{ fontSize: '0.52rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.75)' }}>
             View Details →
           </span>
         </div>
@@ -127,26 +134,16 @@ export default function ProductCard({ id, slug, category, subtitle, description,
       {/* ── Info below image ── */}
       <div className="flex flex-col flex-1 pt-4 pb-5 px-1">
 
-        {/* Name + price row */}
-        <div className="flex items-baseline justify-between gap-2 mb-1">
-          <h3
-            className="font-mono uppercase transition-colors duration-300"
-            style={{
-              fontSize: '0.7rem',
-              letterSpacing: '0.12em',
-              color: 'rgba(255,255,255,0.55)',
-            }}
-          >
-            <span className="group-hover:text-white transition-colors duration-300">
-              {category}
-            </span>
+        {/* Name + price */}
+        <div className="flex items-baseline justify-between gap-2 mb-1.5">
+          <h3 className="font-mono uppercase transition-colors duration-300 text-white/60 group-hover:text-white"
+            style={{ fontSize: '0.75rem', letterSpacing: '0.1em' }}>
+            {category}
           </h3>
           {price && (
-            <span className="font-mono shrink-0"
-              style={{ fontSize: '0.7rem', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.4)' }}>
-              <span className="group-hover:text-white transition-colors duration-300">
-                €{price}
-              </span>
+            <span className="font-mono shrink-0 transition-colors duration-300 text-white/40 group-hover:text-white"
+              style={{ fontSize: '0.75rem', letterSpacing: '0.08em' }}>
+              €{price}
             </span>
           )}
         </div>
@@ -154,14 +151,14 @@ export default function ProductCard({ id, slug, category, subtitle, description,
         {/* Subtitle */}
         {subtitle && (
           <p className="font-mono uppercase mb-2"
-            style={{ fontSize: '0.52rem', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.25)' }}>
+            style={{ fontSize: '0.6rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.28)' }}>
             {subtitle}
           </p>
         )}
 
         {/* Description */}
-        <p className="font-mono leading-relaxed mb-3 flex-1"
-          style={{ fontSize: '0.58rem', letterSpacing: '0.04em', color: 'rgba(255,255,255,0.3)', lineHeight: 1.7 }}>
+        <p className="font-inter leading-relaxed mb-3 flex-1"
+          style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.65 }}>
           {description}
         </p>
 
@@ -179,13 +176,13 @@ export default function ProductCard({ id, slug, category, subtitle, description,
             target="_blank"
             rel="noopener noreferrer"
             onClick={e => e.stopPropagation()}
-            className="font-mono uppercase text-center w-full py-2.5
+            className="font-mono uppercase text-center w-full
                        transition-all duration-200 hover:bg-off-white hover:text-raw-black"
             style={{
-              fontSize: '0.52rem',
-              letterSpacing: '0.25em',
+              fontSize: '0.58rem', letterSpacing: '0.25em',
               color: 'rgba(255,255,255,0.6)',
               border: '1px solid rgba(255,255,255,0.15)',
+              padding: '0.85rem',
               display: 'block',
             }}
           >
