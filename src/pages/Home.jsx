@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import FadeIn            from '../components/FadeIn'
 import Ticker            from '../components/Ticker'
 import Navbar            from '../components/Navbar'
+
 import Hero              from '../components/Hero'
 import Manifesto         from '../components/Manifesto'
 import SustainabilityBar from '../components/SustainabilityBar'
@@ -21,7 +22,6 @@ export default function Home({ ready }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease }}
     >
-      <Ticker accent />
       <Navbar />
       <Hero ready={ready} />
       <Ticker reverse />

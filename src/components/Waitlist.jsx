@@ -76,7 +76,7 @@ export default function Waitlist() {
         <a
           href="#collection"
           onClick={e => { e.preventDefault(); window.__lenis ? window.__lenis.scrollTo('#collection', { offset: -60 }) : document.querySelector('#collection')?.scrollIntoView({ behavior: 'smooth' }) }}
-          className="font-inter font-bold uppercase inline-block mb-12
+          className="font-inter font-bold uppercase inline-block mb-12 w-full sm:w-auto text-center
                      transition-opacity duration-150 hover:opacity-85"
           style={{
             backgroundColor: '#ffffff',
@@ -190,7 +190,7 @@ export default function Waitlist() {
               Email
             </span>
             <span
-              className="font-mono transition-colors group-hover:text-white"
+              className="font-mono transition-colors group-hover:text-white break-all"
               style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)' }}
             >
               twentytwo.twentytwo2025@gmail.com

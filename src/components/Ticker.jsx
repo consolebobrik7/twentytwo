@@ -9,9 +9,10 @@ const ITEMS = [
   'SLOW DROP',
 ]
 
-export default function Ticker({ reverse = false, accent = false }) {
-  const row = [...ITEMS, ...ITEMS]
+// Repeat enough times so the strip is always wider than the viewport
+const ROW = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS]
 
+export default function Ticker({ reverse = false, accent = false }) {
   return (
     <div
       className={`
@@ -22,22 +23,20 @@ export default function Ticker({ reverse = false, accent = false }) {
       `}
     >
       <div
-        className="flex gap-10 whitespace-nowrap w-max"
+        className="flex whitespace-nowrap w-max will-change-transform"
         style={{
-          animation: reverse
-            ? 'ticker 22s linear infinite reverse'
-            : 'ticker 22s linear infinite',
+          animation: `ticker ${reverse ? '28s' : '22s'} linear infinite ${reverse ? 'reverse' : ''}`,
         }}
       >
-        {row.map((item, i) => (
+        {ROW.map((item, i) => (
           <span
-            key={i}
-            className={`font-mono text-[0.6rem] uppercase tracking-[0.25em]
+            key={`${item}-${i}`}
+            className={`font-mono text-[0.6rem] uppercase tracking-[0.25em] px-5
               ${accent ? 'text-off-white' : 'text-ash/70'}`}
           >
             {item}
-            <span className={`ml-10 ${accent ? 'text-off-white/50' : 'text-brand-light/60'}`}>
-              ——
+            <span className={`ml-5 ${accent ? 'text-off-white/40' : 'text-brand-light/60'}`}>
+              ·
             </span>
           </span>
         ))}

@@ -9,13 +9,13 @@ export default function ScrollProgress() {
       style={{
         scaleX,
         position: 'fixed',
-        top: 0,
+        top: '2rem',        /* sits flush below the pinned Ticker (≈ 2rem tall) */
         left: 0,
         right: 0,
         height: '1px',
         background: '#b52e2e',
         transformOrigin: 'left',
-        zIndex: 99998,
+        zIndex: 55,          /* below Ticker z-[60] so Ticker always on top */
         pointerEvents: 'none',
       }}
     />

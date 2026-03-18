@@ -138,7 +138,7 @@ export default function FAQ() {
 
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
             {faqs.map((item, i) => (
-              <FAQItem key={i} {...item} index={i} />
+              <FAQItem key={item.q} {...item} index={i} />
             ))}
           </div>
         </div>

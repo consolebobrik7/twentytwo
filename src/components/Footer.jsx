@@ -2,7 +2,10 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-raw-black border-t border-raw-slate py-14">
+    <footer
+      className="bg-raw-black border-t border-raw-slate pt-14 pb-14"
+      style={{ paddingBottom: 'calc(3.5rem + env(safe-area-inset-bottom, 0px))' }}
+    >
       <div className="section-container">
 
         {/* Top row — wordmark + nav */}
@@ -31,7 +34,7 @@ export default function Footer() {
         <div className="border-t border-raw-slate mb-10" />
 
         {/* Contact row */}
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mb-10">
+        <div className="flex flex-col gap-6 sm:flex-row sm:gap-12 mb-10">
           <a
             href="https://instagram.com/twentytwo.twentytwo_"
             target="_blank"
@@ -63,7 +66,7 @@ export default function Footer() {
               Email
             </span>
             <span
-              className="font-mono transition-colors group-hover:text-white"
+              className="font-mono transition-colors group-hover:text-white break-all"
               style={{ fontSize: '0.6rem', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}
             >
               twentytwo.twentytwo2025@gmail.com
@@ -72,7 +75,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p
             className="font-mono uppercase"
             style={{ fontSize: '0.55rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.18)' }}
@@ -84,6 +87,20 @@ export default function Footer() {
             style={{ fontSize: '0.55rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.18)' }}
           >
             Made in Cyprus // Circular Fashion Lab
+          </p>
+          <p
+            className="font-mono uppercase"
+            style={{ fontSize: '0.55rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.18)' }}
+          >
+            Edited by{' '}
+            <a
+              href="https://hexadev-web.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hexadev-gradient"
+            >
+              HexaDev Team
+            </a>
           </p>
         </div>
 

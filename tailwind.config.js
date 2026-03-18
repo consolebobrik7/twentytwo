@@ -42,15 +42,9 @@ export default {
         '0.5': '0.5px',
       },
       animation: {
-        'ticker':      'ticker 20s linear infinite',
-        'fade-up':     'fadeUp 0.7s ease forwards',
-        'pulse-slow':  'pulse 4s cubic-bezier(0.4,0,0.6,1) infinite',
+        'fade-up': 'fadeUp 0.7s ease forwards',
       },
       keyframes: {
-        ticker: {
-          '0%':   { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
         fadeUp: {
           '0%':   { opacity: '0', transform: 'translateY(24px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },

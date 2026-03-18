@@ -12,7 +12,7 @@ function StaggerText({ text, color, style = {} }) {
   return (
     <span ref={ref} style={{ display: 'inline', ...style }}>
       {words.map((word, i) => (
-        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.22em' }}>
+        <span key={`${word}-${i}`} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', marginRight: '0.22em' }}>
           <motion.span
             style={{ display: 'inline-block', color }}
             initial={{ y: '100%', opacity: 0 }}

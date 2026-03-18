@@ -12,7 +12,7 @@ const links = [
 
 function scrollTo(href) {
   if (window.__lenis) {
-    window.__lenis.scrollTo(href, { offset: -60 })
+    window.__lenis.scrollTo(href, { offset: -80 })
   } else {
     const el = document.querySelector(href)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -40,14 +40,16 @@ export default function Navbar() {
   return (
     <header
       className={`
-        fixed top-0 left-0 right-0 z-50
-        transition-all duration-200 border-b border-dashed
-        ${scrolled
-          ? 'bg-raw-black/96 backdrop-blur border-raw-slate/60'
-          : 'bg-transparent border-transparent'}
+        fixed top-8 left-0 right-0 z-50
+        transition-all duration-200
+        ${scrolled ? 'bg-raw-black/96 backdrop-blur' : 'bg-transparent'}
       `}
     >
-      <div className="px-gutter lg:px-gutter-lg flex items-center justify-between h-12">
+      <div className={`
+        border-b border-dashed transition-colors duration-200
+        ${scrolled ? 'border-raw-slate/60' : 'border-transparent'}
+        px-gutter lg:px-gutter-lg flex items-center justify-between h-12
+      `}>
 
         {/* Logo */}
         <a href="#" className="flex items-center shrink-0">
@@ -104,7 +106,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease }}
-            className="md:hidden fixed inset-0 top-[3rem] bg-raw-black
+            className="md:hidden fixed inset-0 top-20 bg-raw-black
                        flex flex-col justify-center items-start
                        px-gutter gap-8 z-40"
             style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
@@ -118,7 +120,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.08 * i, ease }}
                 className="font-inter font-black text-4xl text-off-white uppercase
-                           tracking-tight hover:text-brand transition-colors"
+                           tracking-tight hover:text-brand-light transition-colors"
                 style={{ letterSpacing: '-0.03em' }}
               >
                 <span

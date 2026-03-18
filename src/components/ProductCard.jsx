@@ -30,13 +30,14 @@ export default function ProductCard({ id, slug, category, subtitle, description,
 
       {/* ── Image container ── */}
       <div
-        className="relative overflow-hidden bg-raw-charcoal"
-        style={{ aspectRatio: '3 / 4' }}
+        className="relative overflow-hidden bg-raw-charcoal aspect-[4/3] sm:aspect-[3/4]"
       >
         {images.length > 0 ? (
           <img
             src={images[current]}
             alt={category}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover
                        transition-transform duration-700 ease-out
                        group-hover:scale-105"
@@ -78,7 +79,7 @@ export default function ProductCard({ id, slug, category, subtitle, description,
         {/* Image arrows — always visible on mobile, hover-only on desktop */}
         {images.length > 1 && (
           <>
-            <button onClick={prev}
+            <button onClick={prev} aria-label="Previous image"
               className="absolute left-2 top-1/2 -translate-y-1/2 z-10
                          opacity-100 md:opacity-0 md:group-hover:opacity-100
                          transition-opacity duration-200 flex items-center justify-center"
@@ -86,7 +87,7 @@ export default function ProductCard({ id, slug, category, subtitle, description,
                 background: 'rgba(8,8,8,0.6)', border: '1px solid rgba(255,255,255,0.15)',
                 color: '#fff', width: 40, height: 40, fontSize: '1.1rem',
               }}>‹</button>
-            <button onClick={next}
+            <button onClick={next} aria-label="Next image"
               className="absolute right-2 top-1/2 -translate-y-1/2 z-10
                          opacity-100 md:opacity-0 md:group-hover:opacity-100
                          transition-opacity duration-200 flex items-center justify-center"
@@ -100,6 +101,7 @@ export default function ProductCard({ id, slug, category, subtitle, description,
               {images.map((_, i) => (
                 <button key={i}
                   onClick={e => { e.stopPropagation(); setCurrent(i) }}
+                  aria-label={`View image ${i + 1} of ${images.length}`}
                   className="flex items-center justify-center"
                   style={{ width: 24, height: 24, background: 'transparent', border: 'none', padding: 0, cursor: 'pointer' }}
                 >
@@ -116,10 +118,10 @@ export default function ProductCard({ id, slug, category, subtitle, description,
           </>
         )}
 
-        {/* View Details — always visible on mobile, hover-only on desktop */}
+        {/* View Details — hover only */}
         <div
           className="absolute bottom-0 left-0 right-0 z-10
-                     opacity-100 md:opacity-0 md:group-hover:opacity-100
+                     opacity-0 group-hover:opacity-100
                      transition-opacity duration-300
                      flex items-center justify-center py-3"
           style={{ background: 'rgba(8,8,8,0.75)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
@@ -170,7 +172,7 @@ export default function ProductCard({ id, slug, category, subtitle, description,
         </div>
 
         {/* Buy button */}
-        {stripeUrl && (
+        {stripeUrl ? (
           <a
             href={stripeUrl}
             target="_blank"
@@ -188,6 +190,18 @@ export default function ProductCard({ id, slug, category, subtitle, description,
           >
             Buy Now — €{price}
           </a>
+        ) : (
+          <span
+            className="font-mono uppercase text-center w-full block"
+            style={{
+              fontSize: '0.58rem', letterSpacing: '0.25em',
+              color: 'rgba(255,255,255,0.22)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              padding: '0.85rem',
+            }}
+          >
+            View Details →
+          </span>
         )}
       </div>
 

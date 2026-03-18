@@ -57,6 +57,39 @@
   }
 }
 
+/* ─── Ticker marquee ─── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Pulsing dot (used in Hero live indicator + IntroLoader) ─── */
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.5; transform: scale(1.2);  }
+}
+
+/* ─── HexaDev interactive gradient ─── */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hexadev-gradient {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6, #06b6d4, #a855f7, #7c3aed);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 4s ease infinite;
+  transition: animation-duration 0.3s;
+}
+
+.hexadev-gradient:hover {
+  animation-duration: 1s;
+}
+
 /* ─── Hide scrollbar on swipe containers ─── */
 .scrollbar-none { scrollbar-width: none; }
 .scrollbar-none::-webkit-scrollbar { display: none; }

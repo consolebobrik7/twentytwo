@@ -70,7 +70,7 @@ export default function Hero({ ready }) {
         {/* Live indicator */}
         <motion.div
           variants={blockVariants}
-          className="absolute top-20 right-0 flex flex-col items-end gap-1.5"
+          className="absolute top-28 right-0 flex flex-col items-end gap-1.5"
         >
           <div className="flex items-center gap-2">
             <span
@@ -89,7 +89,7 @@ export default function Hero({ ready }) {
         </motion.div>
 
         {/* Category label */}
-        <motion.div variants={blockVariants} className="pt-20 lg:pt-32">
+        <motion.div variants={blockVariants} className="pt-28 lg:pt-36">
           <span className="font-mono uppercase inline-block"
             style={{
               fontSize: '0.65rem', letterSpacing: '0.3em',

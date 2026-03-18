@@ -45,7 +45,7 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseover', onOver)
     }
-  }, [rawX, rawY])
+  }, [])
 
   if (isTouch) return null
 

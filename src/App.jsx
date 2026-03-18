@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
@@ -6,8 +6,10 @@ import Lenis from 'lenis'
 import CustomCursor   from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
 import IntroLoader    from './components/IntroLoader'
-import Home           from './pages/Home'
-import ProductDetail  from './pages/ProductDetail'
+import Ticker         from './components/Ticker'
+
+const Home          = lazy(() => import('./pages/Home'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
 // IntroLoader only shows once per browser session
 const hasVisited = sessionStorage.getItem('__22_visited')
@@ -15,12 +17,14 @@ const hasVisited = sessionStorage.getItem('__22_visited')
 function AnimatedRoutes({ ready }) {
   const location = useLocation()
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home ready={ready} />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={null}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home ready={ready} />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   )
 }
 
@@ -59,6 +63,11 @@ function AppInner() {
 
   return (
     <>
+      {/* Global fixed ticker — always pinned at the very top */}
+      <div className="fixed top-0 left-0 right-0 z-[60]">
+        <Ticker accent />
+      </div>
+
       <CustomCursor />
       <ScrollProgress />
 

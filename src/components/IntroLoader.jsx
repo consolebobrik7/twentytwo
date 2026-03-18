@@ -7,7 +7,7 @@ export default function IntroLoader() {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.1, ease: [0.215, 0.61, 0.355, 1] }}
+      transition={{ duration: 1.1, ease }}
       style={{
         position: 'fixed',
         inset: 0,
@@ -17,6 +17,8 @@ export default function IntroLoader() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '0 1.5rem',          /* prevents text overflow on narrow screens */
+        overflowX: 'hidden',
       }}
     >
       {/* Brand wordmark */}
@@ -27,11 +29,13 @@ export default function IntroLoader() {
         style={{
           fontFamily: 'Inter, system-ui, sans-serif',
           fontWeight: 900,
-          fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+          fontSize: 'clamp(1.5rem, 7vw, 3.5rem)',   /* smaller min so it fits 320px screens */
           letterSpacing: '-0.04em',
           textTransform: 'uppercase',
           color: '#ffffff',
           margin: 0,
+          textAlign: 'center',
+          whiteSpace: 'nowrap',                      /* keep on one line */
         }}
       >
         twentytwo<span style={{ color: '#b52e2e' }}>.</span>twentytwo
@@ -45,10 +49,11 @@ export default function IntroLoader() {
         style={{
           fontFamily: '"Space Mono", monospace',
           fontSize: '0.55rem',
-          letterSpacing: '0.4em',
+          letterSpacing: '0.25em',                   /* reduced from 0.4em — fits mobile */
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.3)',
           marginTop: '1rem',
+          textAlign: 'center',
         }}
       >
         Collection 01 — SS26
@@ -70,14 +75,14 @@ export default function IntroLoader() {
         }}
       />
 
-      {/* Red accent dot bottom-right */}
+      {/* Red accent dot — respects safe-area inset on notched phones */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.6 }}
         style={{
           position: 'absolute',
-          bottom: '2rem',
+          bottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))',
           right: '2.5rem',
           display: 'flex',
           alignItems: 'center',

@@ -27,8 +27,7 @@ export default function ProductDetail() {
   const [activeImg, setActiveImg] = useState(0)
 
   useEffect(() => {
-    if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true })
-    else window.scrollTo(0, 0)
+    window.__lenis ? window.__lenis.scrollTo(0, { immediate: true }) : window.scrollTo(0, 0)
     setActiveImg(0)
   }, [id])
 
@@ -59,7 +58,7 @@ export default function ProductDetail() {
     >
       {/* ── Top bar ── */}
       <div
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-gutter lg:px-gutter-lg h-12"
+        className="fixed top-8 left-0 right-0 z-50 flex items-center justify-between px-gutter lg:px-gutter-lg h-12"
         style={{ background: 'rgba(8,8,8,0.92)', backdropFilter: 'blur(8px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
       >
         <Link to="/"
@@ -82,7 +81,7 @@ export default function ProductDetail() {
       </div>
 
       {/* ── Main layout — mobile: vertical stack, desktop: 60/40 split ── */}
-      <div className="pt-12 lg:grid lg:grid-cols-[60%_40%] lg:items-start">
+      <div className="pt-20 lg:grid lg:grid-cols-[60%_40%] lg:items-start">
 
         {/* Left — image gallery */}
         <motion.div
@@ -97,6 +96,8 @@ export default function ProductDetail() {
                 <img
                   src={product.images[activeImg]}
                   alt={`${product.category} ${activeImg + 1}`}
+                  loading="eager"
+                  decoding="async"
                   className="w-full h-full object-cover transition-opacity duration-300"
                 />
               </div>
@@ -108,10 +109,11 @@ export default function ProductDetail() {
                     <button
                       key={i}
                       onClick={() => setActiveImg(i)}
+                      aria-label={`View image ${i + 1} of ${product.images.length}`}
                       className="flex-1 overflow-hidden relative"
                       style={{ aspectRatio: '1 / 1', opacity: i === activeImg ? 1 : 0.45, transition: 'opacity 0.2s' }}
                     >
-                      <img src={src} alt="" className="w-full h-full object-cover" />
+                      <img src={src} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
@@ -129,7 +131,7 @@ export default function ProductDetail() {
 
         {/* Right — product info */}
         <motion.div
-          className="lg:sticky lg:top-12 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto
+          className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto
                      px-gutter lg:px-10 py-8 lg:py-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

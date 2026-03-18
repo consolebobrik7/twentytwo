@@ -41,21 +41,7 @@ export default function ProductGallery() {
           </p>
         </div>
 
-        {/* Mobile: horizontal snap-scroll showing next card peeking */}
-        <div className="md:hidden flex gap-px overflow-x-auto snap-x snap-mandatory
-                        scrollbar-none -mx-gutter px-gutter"
-             style={{ background: 'transparent' }}>
-          {products.map(p => (
-            <div key={p.slug} className="snap-start shrink-0 w-[85vw]">
-              <ProductCard {...p} />
-            </div>
-          ))}
-          {/* Right padding so last card doesn't sit flush against edge */}
-          <div className="shrink-0 w-gutter" />
-        </div>
-
-        {/* Desktop: standard 3-col grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-px"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
              style={{ background: 'rgba(255,255,255,0.06)' }}>
           {products.map(p => (
             <ProductCard key={p.slug} {...p} />

@@ -113,8 +113,8 @@ export default function Mission() {
               { to: 0,   suffix: 'L', label: 'Water Used'     },
               { to: 100, suffix: '%', label: 'Upcycled Denim'  },
               { to: 0,   suffix: '',  label: 'Virgin Fabric'   },
-            ].map((item, i) => (
-              <div key={i} className="flex items-baseline gap-2">
+            ].map((item) => (
+              <div key={item.label} className="flex items-baseline gap-2">
                 <span
                   className="font-inter font-black"
                   style={{ fontSize: '1.4rem', letterSpacing: '-0.03em', color: '#ffffff' }}
