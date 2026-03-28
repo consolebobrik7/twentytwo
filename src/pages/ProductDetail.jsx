@@ -80,47 +80,56 @@ export default function ProductDetail() {
         </span>
       </div>
 
-      {/* ── Main layout — mobile: vertical stack, desktop: 60/40 split ── */}
-      <div className="pt-20 lg:grid lg:grid-cols-[60%_40%] lg:items-start">
+      {/* ── Main layout — mobile: stack, desktop: sticky-left / scrolling-right ── */}
+      <div className="pt-20 lg:flex lg:items-start">
 
-        {/* Left — image gallery */}
+        {/* Left — sticky image gallery, always fits viewport */}
         <motion.div
+          className="lg:sticky lg:top-20 lg:w-[58%] lg:h-[calc(100vh-5rem)] flex flex-col"
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease }}
         >
           {product.images.length > 0 ? (
-            <>
-              {/* Main image */}
-              <div className="relative overflow-hidden bg-raw-charcoal" style={{ aspectRatio: '3 / 4' }}>
+            /* Gallery: active image large (left 2/3), others stacked (right 1/3) */
+            <div className="flex gap-px flex-1 min-h-0">
+              {/* Active / main image */}
+              <div className="bg-raw-charcoal overflow-hidden" style={{ flex: 2 }}>
                 <img
                   src={product.images[activeImg]}
                   alt={`${product.category} ${activeImg + 1}`}
                   loading="eager"
                   decoding="async"
-                  className="w-full h-full object-cover transition-opacity duration-300"
+                  className="w-full h-full object-contain transition-opacity duration-300"
                 />
               </div>
 
-              {/* Thumbnail strip */}
+              {/* Other images stacked */}
               {product.images.length > 1 && (
-                <div className="flex gap-px mt-px" style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  {product.images.map((src, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImg(i)}
-                      aria-label={`View image ${i + 1} of ${product.images.length}`}
-                      className="flex-1 overflow-hidden relative"
-                      style={{ aspectRatio: '1 / 1', opacity: i === activeImg ? 1 : 0.45, transition: 'opacity 0.2s' }}
-                    >
-                      <img src={src} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
+                <div className="flex flex-col gap-px" style={{ flex: 1 }}>
+                  {product.images.map((src, i) => {
+                    if (i === activeImg) return null
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImg(i)}
+                        aria-label={`View image ${i + 1}`}
+                        className="overflow-hidden flex-1 min-h-0"
+                        style={{ opacity: 0.6, transition: 'opacity 0.2s' }}
+                        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                        onMouseLeave={e => e.currentTarget.style.opacity = '0.6'}
+                      >
+                        <img src={src} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                      </button>
+                    )
+                  })}
                 </div>
               )}
-            </>
+            </div>
           ) : (
-            <div className="flex items-center justify-center bg-raw-charcoal" style={{ aspectRatio: '3 / 4' }}>
+            <div className="flex-1 min-h-0 flex items-center justify-center bg-raw-charcoal"
+              style={{ minHeight: '50vh' }}
+            >
               <span className="font-mono uppercase"
                 style={{ fontSize: '0.6rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.15)' }}>
                 Photos Coming Soon
@@ -129,14 +138,12 @@ export default function ProductDetail() {
           )}
         </motion.div>
 
-        {/* Right — product info */}
+        {/* Right — scrolls with page, info always accessible */}
         <motion.div
-          className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto
-                     px-gutter lg:px-10 py-8 lg:py-10"
+          className="lg:w-[42%] px-gutter lg:px-10 py-8 lg:py-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          style={{ scrollbarWidth: 'none' }}
         >
           {/* Label */}
           <span className="font-mono uppercase block mb-5"
